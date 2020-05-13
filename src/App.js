@@ -9,6 +9,8 @@ function App() {
 
   return (
     <>
+      <div className="App"> Hello Art</div>
+        
        <TodoList todos={todos} /> 
         <input type="text"></input>
         <button>Add Todo</button>
