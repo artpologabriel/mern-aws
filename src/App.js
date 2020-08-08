@@ -1,24 +1,79 @@
-import React,{ useState } from 'react'
+import React,{ useState, useRef, useEffect } from 'react'
 import TodoList from './TodoList'
 import Todo from './Todo'
 import AppCss from './App.css'
 
-function App() {
-
-  const [todos, setTodos] = useState(['Todo 1', 'Todo 2'])
 
 
-  return (
-    <>
-      <div className="App"> Hello Art</div>
-        
-       <TodoList todos={todos} /> 
-        <input type="text"></input>
-        <button>Add Todo</button>
-        <button>Clear</button>
-        <div>0 left to do</div>
-    </>
-  );
+
+class Square extends React.Component {
+
+  constructor(props) {    
+    super(props);    
+    this.state = {      
+      value: null,    
+    };  
+  }
+
+  render() {
+    return (
+      <button 
+      className="square" 
+      onClick={ () => { this.setState({value: 'X'}) }}>        
+      {this.state.value}
+      </button>
+    );
+  }
 }
 
-export default App;
+class Board extends React.Component {
+  renderSquare(i) {
+    return <Square />;
+  }
+
+  render() {
+    const status = 'Next player: X';
+
+    return (
+      <div>
+        <div className="status">{status}</div>
+        <div className="board-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(6)}
+          {this.renderSquare(7)}
+          {this.renderSquare(8)}
+        </div>
+      </div>
+    );
+  }
+}
+
+class Game extends React.Component {
+  render() {
+    return (
+      <div className="game">
+        <div className="game-board">
+          <Board />
+        </div>
+        <div className="game-info">
+          <div>{/* status */}</div>
+          <ol>{/* TODO */}</ol>
+        </div>
+      </div>
+    );
+  }
+}
+
+
+
+
+export default Game;
